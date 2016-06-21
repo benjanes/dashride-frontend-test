@@ -4,9 +4,21 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.version',
+  'form',
+  'datefact',
+  'services'
 ])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({ redirectTo: '/view1' });
+  $routeProvider
+    .when('/', {
+      templateUrl: 'components/form/form.html',
+      controller: 'formCtrl'
+    })
+    .when('/:month/:day/:year', {
+      templateUrl: 'components/datefact/datefact.html',
+      controller: 'datefactCtrl'
+    })
+    .otherwise({ redirectTo: '/' });
 }]);
